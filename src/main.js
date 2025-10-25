@@ -11,7 +11,7 @@ function calculateSimpleRevenue(purchase, _product) {
   const discountRate = discount / 100;
   const revenueFactor = 1 - discountRate;
   const revenue = fullAmount * revenueFactor;
-  return +revenue.toFixed(2);
+  return revenue;
 }
 
 /**
@@ -129,7 +129,9 @@ function analyzeSalesData(data, options) {
 
       const revenue = calculateRevenue(item, product);
 
-      const profit = revenue - cost;
+      const rawProfit = revenue - cost;
+
+      const profit = +rawProfit.toFixed(2);
 
       totalRevenueFromItems += revenue;
       totalProfitFromItems += profit;
