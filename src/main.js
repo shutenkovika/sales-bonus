@@ -11,7 +11,7 @@ function calculateSimpleRevenue(purchase, _product) {
   const discountRate = discount / 100;
   const revenueFactor = 1 - discountRate;
   const revenue = fullAmount * revenueFactor;
-  return revenue;
+  return +revenue.toFixed(2);
 }
 
 /**
@@ -89,19 +89,10 @@ function analyzeSalesData(data, options) {
       products_sold: {},
     };
 
-    //const salesStats = initialStatsArray.reduce((acc, stat) => {
-    //  acc[stat.seller_id] = stat;
-    //  return acc;
-    //});
-
     return acc;
   }, {});
 
   // @TODO: Индексация продавцов и товаров для быстрого доступа
-  //const sellerMap = data.sellers.reduce((acc, seller) => {
-  //  acc[seller.id] = seller;
-  //  return acc;
-  //}, {});
 
   const producMap = data.products.reduce((acc, product) => {
     acc[product.sku] = product;
