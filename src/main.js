@@ -130,9 +130,7 @@ function analyzeSalesData(data, options) {
 
       const revenue = calculateRevenue(item, product);
 
-      const rawProfit = revenue - cost;
-
-      const profit = +rawProfit.toFixed(2);
+      const profit = revenue - cost;
 
       totalProfitFromItems += profit;
 
