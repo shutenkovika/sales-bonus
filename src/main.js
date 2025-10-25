@@ -110,9 +110,10 @@ function analyzeSalesData(data, options) {
       return;
     }
 
+    sellerStatsRecord.revenue += record.total_amount;
     sellerStatsRecord.sales_count += 1;
 
-    let totalRevenueFromItems = 0;
+    //let totalRevenueFromItems = 0;
     let totalProfitFromItems = 0;
 
     record.items.forEach((item) => {
@@ -127,15 +128,12 @@ function analyzeSalesData(data, options) {
 
       const cost = product.purchase_price * item.quantity;
 
-      const rawRevenue = calculateRevenue(item, product);
-
-      const revenue = +rawRevenue.toFixed(2);
+      const revenue = calculateRevenue(item, product);
 
       const rawProfit = revenue - cost;
 
       const profit = +rawProfit.toFixed(2);
 
-      totalRevenueFromItems += revenue;
       totalProfitFromItems += profit;
 
       if (!sellerStatsRecord.products_sold[item.sku]) {
@@ -144,8 +142,6 @@ function analyzeSalesData(data, options) {
 
       sellerStatsRecord.products_sold[item.sku] += item.quantity;
     });
-
-    sellerStatsRecord.revenue += totalRevenueFromItems;
 
     sellerStatsRecord.profit += totalProfitFromItems;
   });
